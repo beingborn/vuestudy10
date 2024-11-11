@@ -1,74 +1,82 @@
 <template>
   <header>
-      <nav>
-        <ul>
-          <li v-for="(a,i) in navbar" :key='i'>
-            <a href="#">{{navbar[i]}}</a>
-          </li>
-        </ul>
-      </nav>
+    <div class="menu">
+      <a v-for="headerMenu in menus" :key="headerMenu">{{headerMenu}}</a>
+    </div>
   </header>
-    <div class="black-bg" v-if="isModalOpen == true">
-  <div class="white-bg">
-    <h4>상세페이지</h4>
-    <p>상세페이지내용임</p>
-    <button @click='isModalOpen = false'>모달창 닫기</button>
-  </div>
-  </div>
-  <div v-for="(a,i) in products" :key="i">
-    <img src="./assets/room0.jpg" alt="" class="room-img">
-    <h4 class="tit" @click='isModalOpen = true'>{{products[i]}}</h4>
-    <p>XX 만원</p>
-    <button @click='increase(i)'>허위매물신고</button>
-    <span> 신고수 : {{신고수[i]}}</span>
+  <div class="products-list" v-for="(a,i) in products" :key="i">
+    <h4>{{products[i].name}}</h4>
+    <p>{{products[i].price}}</p>
+    <button @click="increase(i)">허위매물신고</button>
+    <button @click="isModalOpen = true">모달창 열기</button>
+    <span>{{warn[i]}}</span>
   </div>
 
   <div>
-    {{oneroom}}
+    <DiscountBanner></DiscountBanner>
+    <h4>{{oneroomData}}</h4>
+  </div>
+
+  <div class="black-bg" v-if="isModalOpen == true">
+    <div class="white-bg">
+      <h4>상세페이지</h4>
+      <p>상세페이지 내용</p>
+    </div>
   </div>
 
 </template>
 
 <script>
 
-import data from './assets/oneroom.js'
+import DiscountBanner from './components/DiscountBanner.vue'
+import oneroom from './assets/oneroom'
 
 export default {
-  name: 'App',
-  data() {
-    return  {
-      oneroom : data,
-      신고수 : [0,0,0],
-      메뉴들 : ['', '', ''],
-      products : ['역삼동 원룸' , '잠실역 원룸' , '마포구 원룸'],
-      navbar : ['home' , 'about', 'skills', 'mypage'],
-      isModalOpen : false, 
+  data(){
+    return {
+      isModalOpen : false,
+      oneroomData : oneroom,
+      menus : ['home', 'shop', 'about'],
+      products : [{name:'천호동 원룸' , price: '35,000'} , {name: '잠실역 원룸' ,price : '32,000'},  {name: '객체역 원룸' ,price : '15,000'} ],
+      warn : [0,1,2],
     }
   },
   methods : {
     increase(i){
-      this.신고수[i] += 1
+      this.warn[i] += 1
     }
+  },
+
+  components : {
+    DiscountBanner : DiscountBanner,
   }
+
 }
 </script>
 
 <style>
+  /* common */
   * {box-sizing: border-box;}
-  body {margin: 0;}
+  body {margin: 0; padding: 0;}
+  header .menu {display: flex; padding: 20px; background: #eee; color: #000; gap: 80px;}
+  header .menu > a {font-weight: 700;}
+  header .menu > a:hover {background: gray;}
+
   .tit {cursor: pointer;}
   #app {max-width: 1280px; margin: 0px auto;}
-  header > nav > ul {display: flex; gap: 80px; list-style: none; background: aliceblue; padding: 20px;}
   .room-img {max-width: 100%; margin-top: 40px;}
+  /* modal */
   .black-bg {
   width: 100%; height:100%;
   background: rgba(0,0,0,0.5);
   position: fixed; padding: 20px;
+  left: 0;
+  top: 0;
   }
   .white-bg {
     width: 100%; background: white;
     border-radius: 8px;
     padding: 20px;
   } 
-
+    .discount-banner {background: #eee;}
 </style>
