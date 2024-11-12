@@ -17,10 +17,30 @@
     <h4>{{oneroomData}}</h4>
   </div>
 
-  <div class="black-bg" v-if="isModalOpen == true">
+  <!-- 중첩 IF문 -->
+  <div v-if="1 == 2">
+    안녕하세요
+  </div>
+  <div v-else-if="3==3">
+    중첩IF문
+  </div>
+  <!-- .// 중첩 IF문 -->
+
+  <!-- 상품 정보 -->
+  <div class="img-box" v-for="(a,i) in oneroomData" :key="i">
+    <img :src="oneroomData[i].image" class="room-img">
+    <h4 @click="isModalOpen = true; modalNum = i">{{oneroomData[i].title}}</h4>
+    <p>{{oneroomData[i].content}}</p>
+    <span>{{oneroomData[i].price}}원</span>
+  </div>
+  <!-- .// 상품 정보 -->
+
+
+  <div class="black-bg" v-if="isModalOpen == true" >
     <div class="white-bg">
-      <h4>상세페이지</h4>
+      <h4>{{oneroomData[modalNum].title}}</h4>
       <p>상세페이지 내용</p>
+      <button @click="isModalOpen = false">닫기</button>
     </div>
   </div>
 
@@ -28,12 +48,15 @@
 
 <script>
 
+/* 컴포넌트 가지고 오기 */
 import DiscountBanner from './components/DiscountBanner.vue'
+/* 데이터 가지고 오기 */
 import oneroom from './assets/oneroom'
 
 export default {
   data(){
-    return {
+    return { 
+      modalNum : 0, /* 값 저장 */
       isModalOpen : false,
       oneroomData : oneroom,
       menus : ['home', 'shop', 'about'],
@@ -44,7 +67,7 @@ export default {
   methods : {
     increase(i){
       this.warn[i] += 1
-    }
+    },
   },
 
   components : {
@@ -64,7 +87,10 @@ export default {
 
   .tit {cursor: pointer;}
   #app {max-width: 1280px; margin: 0px auto;}
-  .room-img {max-width: 100%; margin-top: 40px;}
+
+  .img-box {width: 600px; margin: 0px auto;}
+  .img-box h4 {cursor: pointer;}
+  .room-img {max-width: 100%; margin-top: 40px; width: 100%;}
   /* modal */
   .black-bg {
   width: 100%; height:100%;
