@@ -17,6 +17,8 @@
     <h4>{{oneroomData}}</h4>
   </div>
 
+  <!-- git test -->
+
   <!-- 중첩 IF문 -->
   <div v-if="1 == 2">
     안녕하세요
