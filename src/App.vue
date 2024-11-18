@@ -1,4 +1,4 @@
-  <!-- 메인브랜치에서 수정 -->
+<!-- 메인브랜치에서 수정 -->
 <template>
   <header>
     <div class="menu">
