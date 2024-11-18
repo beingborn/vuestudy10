@@ -1,3 +1,4 @@
+  <!-- 메인브랜치에서 수정 -->
 <template>
   <header>
     <div class="menu">
@@ -25,6 +26,7 @@
     중첩IF문
   </div>
   <!-- .// 중첩 IF문 -->
+
 
   <!-- 상품 정보 -->
   <div class="img-box" v-for="(a,i) in oneroomData" :key="i">
