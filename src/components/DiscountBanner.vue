@@ -1,5 +1,5 @@
 <template>
-  <div class="discount-banner">할인정보 입력</div>
+  <div class="discount-banner">지금 사면 30% 할인</div>
 </template>
 
 <script>
@@ -9,5 +9,8 @@ export default {
 </script>
 
 <style>
-    .discount-banner {border: 1px solid red;}
+  .discount-banner {
+    padding: 40px;
+    text-align: center;
+  }
 </style>
