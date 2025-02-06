@@ -23,6 +23,7 @@
       <p>{{ oneroomData[i].content }}</p>
       <span>{{ oneroomData[i].price }}원</span>
     </div>
+
     <div class="black-bg" v-if="isModalOpen == true">
       <div class="white-bg">
         <h4>{{ oneroomData[modalNum].title }}</h4>
@@ -32,10 +33,12 @@
     </div>
   </div>
   <DiscountBanner></DiscountBanner>
+  <ModalItem></ModalItem>
 </template>
 
 <script>
 import DiscountBanner from "./components/DiscountBanner.vue"; /* 컴포넌트 가지고 오기 */
+import ModalItem from "./components/ModalItem.vue";
 import oneroom from "./assets/oneroom"; /* 데이터 가지고 오기 */
 
 export default {
@@ -70,6 +73,7 @@ export default {
 
   components: {
     DiscountBanner: DiscountBanner,
+    ModalItem: ModalItem,
   },
 };
 </script>
